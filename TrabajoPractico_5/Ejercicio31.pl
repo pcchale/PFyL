@@ -13,12 +13,12 @@ T, C, S y L, con los minutos que tarda en llenarse o vaciarse el tanque.
 
 /* Si los litros actuales, son iguales a los litros totales del tanque*/
 /* Los minutos que tardó en llenarse, son los minutos acumulados */
-/* Por eso unifico el primer argumento, con el segundo */
+/* Por eso unifico el primer argumento, con el tercero */
 simularMinuto(MinutosAcumulados, lleno, MinutosAcumulados, TotalLitros, TotalLitros, _, _).
 
 /* Si los litros actuales son 0 */
 /* Los minutos que tardó en vaciarse, son los minutos acumulados */
-/* Por eso unifico el primer argumento, con el segundo */
+/* Por eso unifico el primer argumento, con el tercero */
 simularMinuto(MinutosAcumulados, vacio, MinutosAcumulados, 0, _, _, _).
 
 /* Si la velocidad de llenado, es igual a la velocidad de vaciado*/
