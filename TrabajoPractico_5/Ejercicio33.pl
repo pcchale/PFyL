@@ -13,9 +13,14 @@ Regular, cuando el jugador hizo al menos 10 dobles y cometió menos de 12 infrac
 Desastroso, cuando el jugador hizo menos de 10 dobles y cometió 12 o más infracciones.
 */
 
-cantidad_de_dobles(juan, 15).
-cantidad_de_triples(juan, 5).
-cantidad_de_infracciones(juan, 6).
+cantidad_de_dobles(juan, 9).
+cantidad_de_triples(juan, 9).
+cantidad_de_infracciones(juan, 12).
+
+restricciones(posibleNBA, 10, 30, 5).
+restricciones(bueno, 0, 20, 8).
+restricciones(regular, 0, 10, 12).
+restricciones(desastroso, 0, 10, 12).
 
 obtenerEstadisticas(NombreJugador, CantidadDeTriples, CantidadDeDobles, CantidadDeInfracciones) :-
     cantidad_de_triples(NombreJugador, CantidadDeTriples),
@@ -24,21 +29,25 @@ obtenerEstadisticas(NombreJugador, CantidadDeTriples, CantidadDeDobles, Cantidad
 
 calidadJugador(posibleNBA, NombreJugador) :-
     obtenerEstadisticas(NombreJugador, CantidadDeTriples, CantidadDeDobles, CantidadDeInfracciones),
-    CantidadDeTriples > 10,
-    CantidadDeDobles > 30,
-    CantidadDeInfracciones < 5.
+    restricciones(posibleNBA, CantidadDeTriplesMinimos, CantidadDeDoblesMinimos, CantidadDeInfraccionesMaximas),
+    CantidadDeTriples >= CantidadDeTriplesMinimos,
+    CantidadDeDobles >= CantidadDeDoblesMinimos,
+    CantidadDeInfracciones < CantidadDeInfraccionesMaximas.
 
 calidadJugador(bueno, NombreJugador) :-
     obtenerEstadisticas(NombreJugador, _, CantidadDeDobles, CantidadDeInfracciones),
-    CantidadDeDobles > 20,
-    CantidadDeInfracciones < 12.
+    restricciones(bueno, _, CantidadDeDoblesMinimos, CantidadDeInfraccionesMaximas),
+    CantidadDeDobles >= CantidadDeDoblesMinimos,
+    CantidadDeInfracciones < CantidadDeInfraccionesMaximas.
 
 calidadJugador(regular, NombreJugador) :-
     obtenerEstadisticas(NombreJugador, _, CantidadDeDobles, CantidadDeInfracciones),
-    CantidadDeDobles > 10,
-    CantidadDeInfracciones < 12.
+    restricciones(regular, _, CantidadDeDoblesMinimos, CantidadDeInfraccionesMaximas),
+    CantidadDeDobles > CantidadDeDoblesMinimos,
+    CantidadDeInfracciones < CantidadDeInfraccionesMaximas.
 
 calidadJugador(desastroso, NombreJugador) :-
     obtenerEstadisticas(NombreJugador, _, CantidadDeDobles, CantidadDeInfracciones),
-    CantidadDeDobles < 10,
-    CantidadDeInfracciones > 12.
+    restricciones(desastroso, _, CantidadDeDoblesMaximos, CantidadDeInfraccionesMinimas),
+    CantidadDeDobles < CantidadDeDoblesMaximos,
+    CantidadDeInfracciones >= CantidadDeInfraccionesMinimas.
