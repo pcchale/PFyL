@@ -1,5 +1,14 @@
 /* La guia usada es: https://quasar.as.utexas.edu/BillInfo/JulianDatesG.html */
 
+/*
+   Funciones implementadas:
+   fechaADiaJuliano(Dia, Mes, Anio, DiaJuliano).
+   Dado un dia, mes y año, retorna su correspondiente DiaJuliano.
+   
+   diaJulianoAFecha(DiaJuliano, Dia, Mes, Anio).
+   Dado un dia juliano, retorna su correspondiente fecha en Dia, Mes, y Anio.
+*/
+
 acomodarValoresFechaAJuliano(Mes, MesAcomodado, Anio, AnioAcomodado) :-
     Mes >= 1,
     Mes =< 2,
