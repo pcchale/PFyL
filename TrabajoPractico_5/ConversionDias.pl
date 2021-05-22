@@ -1,3 +1,5 @@
+/* La guia usada es: https://quasar.as.utexas.edu/BillInfo/JulianDatesG.html */
+
 acomodarValoresFechaAJuliano(Mes, MesAcomodado, Anio, AnioAcomodado) :-
     Mes >= 1,
     Mes =< 2,
@@ -5,7 +7,9 @@ acomodarValoresFechaAJuliano(Mes, MesAcomodado, Anio, AnioAcomodado) :-
     AnioAcomodado is Anio - 1,
     MesAcomodado is Mes + 12.
 
-acomodarValoresFechaAJuliano(Mes, Mes, Anio, Anio).
+acomodarValoresFechaAJuliano(Mes, Mes, Anio, Anio) :-
+    Mes > 2.
+/* Si el mes no es enero o febrero. Unifica los valores sin tocarlos.*/
 
 fechaADiaJuliano(Dia, Mes, Anio, DiaJuliano) :-
     acomodarValoresFechaAJuliano(Mes, MesAcomodado, Anio, AnioAcomodado),
@@ -29,10 +33,12 @@ obtenerMes(E, Mes) :-
 obtenerAnio(C, Mes, Anio) :-
     Mes >= 1,
     Mes =< 2,
+    /* Si el mes es enero o febrero */
     Anio is C-4715.
 
 obtenerAnio(C, Mes, Anio) :-
     Mes > 2,
+    /* Si el mes no es enero o febrero */
     Anio is C-4716.
 
 acomodarValoresJulianoAFecha(E, C, Mes, Anio) :-
@@ -52,4 +58,3 @@ diaJulianoAFecha(DiaJuliano, Dia, Mes, Anio) :-
     F is truncate(30.6001*E),
     Dia is truncate(B-D-F+(Q-Z)),
     acomodarValoresJulianoAFecha(E, C, Mes, Anio).
-    
