@@ -13,6 +13,8 @@ agregarNumeros(NumeroFinal, NumeroFinal, [NumeroFinal]).
 
 agregarNumeros(NumeroInicial, NumeroFinal, [NumeroInicial|RestoNumeros]) :-
     /* Sin esto no eran mutuamente excluyentes y entraba en un loop. */
-    NumeroInicial =\= NumeroFinal,
+    /*NumeroInicial =\= NumeroFinal, Cambiando esto por lo de abajo, 
+    hace que si pido "estaEntre(NumeroMayor, NumeroMenor, V)", no entre en un loop*/
+    NumeroInicial =< NumeroFinal,
     NumeroInicialAux is NumeroInicial + 1,
     agregarNumeros(NumeroInicialAux, NumeroFinal, RestoNumeros).
