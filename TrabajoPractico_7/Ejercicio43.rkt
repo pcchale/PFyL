@@ -1,40 +1,40 @@
 #lang racket
 
-(define (y mes año)
+(define (yy mes año)
         (cond ((or (equal? mes 1) (equal? mes 2)) (- año 1)) (else año)))
 
 ; (y 10 1582)
 
-(define (m mes año)
+(define (mm mes año)
         (cond ((or (equal? mes 1) (equal? mes 2)) (+ mes 12)) (else mes)))
 
 ; (m 10 1582)
 
-(define (a y) (quotient y 100))
+(define (aa y) (quotient y 100))
 
 ; (a (y 10 1582))
 
-(define (b a) (quotient a 4))
+(define (bb a) (quotient a 4))
 
 ; (b (a (y 10 1582)))
 
-(define (c a b) (+ (- 2 a) b))
+(define (cc a b) (+ (- 2 a) b))
 
 ; (c (a (y 10 1582)) (b (a (y 10 1582))))
 
-(define (e y) (round (- (* 365.25 (+ y 4716)) 0.5)))
+(define (ee y) (truncate (* 365.25 (+ y 4716))))
 
 ; (e (y 10 1582))
 
-(define (f m) (round (- (* 30.6001 (+ m 1)) 0.5)))
+(define (ff m) (truncate (* 30.6001 (+ m 1))))
 
 ; (f (m 10 1582))
 
 (define (aDiaJuliano dia mes año)
-        (+ (c (a (y mes año)) (b (a (y mes año))))
+        (+ (cc (aa (yy mes año)) (bb (aa (yy mes año))))
            dia
-           (e (y mes año))
-           (- (f (m mes año)) 1524.5)))
+           (ee (yy mes año))
+           (- (ff (mm mes año)) 1524.5)))
 
 (define (diferenciaEntreFechas dia1 mes1 año1 dia2 mes2 año2)
         (- (aDiaJuliano dia1 mes1 año1) (aDiaJuliano dia2 mes2 año2)))
