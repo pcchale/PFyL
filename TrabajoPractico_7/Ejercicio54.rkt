@@ -3,9 +3,9 @@
 
 (define (explota numero bomba)
     (cond
-        ((>= bomba numero) numero)
+        ((>= bomba numero) (list numero))
         (else 
-            (cons 
+            (append 
                 (explota (quotient numero bomba) bomba) 
                 (explota (- numero (quotient numero bomba)) bomba)))
     )
